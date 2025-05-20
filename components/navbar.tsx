@@ -44,19 +44,19 @@ export default function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Sheger Entrepreneurs Association"
-                width={50}
-                height={50}
-                className="h-10 w-auto"
+                width={100}
+                height={100}
+                className="h-20 w-auto"
               />
             </motion.div>
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="hidden text-xl font-bold text-blue-700 sm:block"
             >
               Sheger Entrepreneurs
-            </motion.div>
+            </motion.div> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -92,7 +92,7 @@ export default function Navbar() {
                 </motion.div>
               )
             })}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: 0.6 }}
@@ -103,7 +103,7 @@ export default function Navbar() {
               >
                 Portal
               </Button>
-            </motion.div>
+            </motion.div> */}
           </div>
 
           {/* Mobile menu button */}
@@ -147,12 +147,12 @@ export default function Navbar() {
                   </Link>
                 )
               })}
-              <Button
+              {/* <Button
                 variant="outline"
                 className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-400 dark:hover:text-gray-900"
               >
                 Portal
-              </Button>
+              </Button> */}
             </div>
           </motion.div>
         )}
