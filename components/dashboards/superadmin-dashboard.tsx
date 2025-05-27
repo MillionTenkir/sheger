@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 export default function SuperAdminDashboard() {
   return (
     <div className="space-y-6">
-      <h2 className="text-3xl font-bold tracking-tight">Super Admin Dashboard</h2>
+      {/* <h2 className="text-3xl font-bold tracking-tight">Super Admin Dashboard</h2> */}
 
       {/* Overview Cards */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

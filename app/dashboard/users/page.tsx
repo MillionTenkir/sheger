@@ -1,5 +1,6 @@
 "use client"
 
+import React from "react"
 import { useState } from "react"
 import { UserPlus, Search, Filter, MoreHorizontal, Edit, Trash2, Mail } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -141,60 +142,92 @@ export default function UsersPage() {
               Add User
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[700px]">
             <DialogHeader>
               <DialogTitle>Add New User</DialogTitle>
               <DialogDescription>
-                Create a new user account. They'll receive an email to set their password.
+                Create a new user account.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="name" className="text-right">
-                  Name
-                </Label>
-                <Input id="name" className="col-span-3" />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="firstName" className="text-right">
+                    First Name
+                  </Label>
+                  <Input id="firstName" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="middleName" className="text-right">
+                    Middle Name
+                  </Label>
+                  <Input id="middleName" className="col-span-3" />
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="email" className="text-right">
-                  Email
-                </Label>
-                <Input id="email" type="email" className="col-span-3" />
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="lastName" className="text-right">
+                    Last Name
+                  </Label>
+                  <Input id="lastName" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="mobile" className="text-right">
+                    Mobile
+                  </Label>
+                  <Input id="mobile" type="text" className="col-span-3" />
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="role" className="text-right">
-                  Role
-                </Label>
-                <Select>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Select role" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="superadmin">Super Admin</SelectItem>
-                    <SelectItem value="branch_admin">Branch Admin</SelectItem>
-                    <SelectItem value="kidpreneur">Kidpreneur</SelectItem>
-                    <SelectItem value="loan_manager">Loan Manager</SelectItem>
-                    <SelectItem value="checkin_officer">Check-in Officer</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="email" className="text-right">
+                    Email
+                  </Label>
+                  <Input id="email" type="email" className="col-span-3" />
+                </div>
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="password" className="text-right">
+                    Password
+                  </Label>
+                  <Input id="password" type="password" className="col-span-3" />
+                </div>
               </div>
-              <div className="grid grid-cols-4 items-center gap-4">
-                <Label htmlFor="branch" className="text-right">
-                  Branch
-                </Label>
-                <Select>
-                  <SelectTrigger className="col-span-3">
-                    <SelectValue placeholder="Select branch" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="headquarters">Headquarters</SelectItem>
-                    <SelectItem value="addis_ababa">Addis Ababa</SelectItem>
-                    <SelectItem value="bahir_dar">Bahir Dar</SelectItem>
-                    <SelectItem value="hawassa">Hawassa</SelectItem>
-                    <SelectItem value="adama">Adama</SelectItem>
-                    <SelectItem value="mekelle">Mekelle</SelectItem>
-                  </SelectContent>
-                </Select>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="role" className="text-right">
+                    Role
+                  </Label>
+                  <Select>
+                    <SelectTrigger className="col-span-3">
+                      <SelectValue placeholder="Select role" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="superadmin">Super Admin</SelectItem>
+                      <SelectItem value="branch_admin">Branch Admin</SelectItem>
+                      <SelectItem value="kidpreneur">Kidpreneur</SelectItem>
+                      <SelectItem value="loan_manager">Loan Manager</SelectItem>
+                      <SelectItem value="checkin_officer">Check-in Officer</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="grid grid-cols-4 items-center gap-2">
+                  <Label htmlFor="branch" className="text-right">
+                    Branch
+                  </Label>
+                  <Select>
+                    <SelectTrigger className="col-span-3">
+                      <SelectValue placeholder="Select branch" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="headquarters">Headquarters</SelectItem>
+                      <SelectItem value="addis_ababa">Addis Ababa</SelectItem>
+                      <SelectItem value="bahir_dar">Bahir Dar</SelectItem>
+                      <SelectItem value="hawassa">Hawassa</SelectItem>
+                      <SelectItem value="adama">Adama</SelectItem>
+                      <SelectItem value="mekelle">Mekelle</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
             <DialogFooter>

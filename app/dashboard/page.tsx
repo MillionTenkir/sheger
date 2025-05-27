@@ -14,7 +14,7 @@ export default function DashboardPage() {
   // Render the appropriate dashboard based on user role
   const renderDashboard = () => {
     switch (user?.role?.id) {
-      case "4a8ca44c-9650-4fb6-b90e-c05fa2a88ad6":
+      case "4a8ca44c-9650-4fb6-b90e-c05fa2a88ad6": // superadmin
         return <SuperAdminDashboard />
       case "branch_admin":
         return <BranchAdminDashboard />

@@ -21,6 +21,10 @@ import {
   UserPlus,
   Briefcase,
   DollarSign,
+  GitBranchPlus,
+  CalendarCheck2,
+  FolderDot,
+  File
 } from "lucide-react"
 import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
@@ -28,12 +32,18 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
 import Image from "next/image"
 
+// add branches icon
+
+
 // Define sidebar items for different roles
 const sidebarItems = {
   "4a8ca44c-9650-4fb6-b90e-c05fa2a88ad6": [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Users", href: "/dashboard/users", icon: Users },
-    { name: "Branches", href: "/dashboard/branches", icon: Building },
+    { name: "Branches", href: "/dashboard/branches", icon: GitBranchPlus },
+    { name: "Events", href: "/dashboard/events", icon: CalendarCheck2 },
+    { name: "Projects", href: "/dashboard/projects", icon: FolderDot },
+    { name: "BDS", href: "/dashboard/bds", icon: File },
     { name: "Reports", href: "/dashboard/reports", icon: FileText },
     { name: "Settings", href: "/dashboard/settings", icon: Settings },
   ],
