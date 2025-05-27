@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   BarChart3,
   Users,
@@ -26,10 +26,11 @@ import { useAuth } from "@/components/auth-provider"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
+import Image from "next/image"
 
 // Define sidebar items for different roles
 const sidebarItems = {
-  superadmin: [
+  "4a8ca44c-9650-4fb6-b90e-c05fa2a88ad6": [
     { name: "Dashboard", href: "/dashboard", icon: Home },
     { name: "Users", href: "/dashboard/users", icon: Users },
     { name: "Branches", href: "/dashboard/branches", icon: Building },
@@ -70,9 +71,10 @@ export default function DashboardSidebar() {
   const [collapsed, setCollapsed] = useState(false)
   const { user, logout } = useAuth()
   const pathname = usePathname()
+  console.log("the user", user)
 
   // Default to kidpreneur if no user or role not found
-  const role = user?.role || "kidpreneur"
+  const role = user?.role?.id || "kidpreneur"
   const items = sidebarItems[role as keyof typeof sidebarItems] || sidebarItems.kidpreneur
 
   return (
@@ -87,38 +89,48 @@ export default function DashboardSidebar() {
       {/* Sidebar */}
       <motion.div
         initial={{ width: "240px" }}
-        animate={{ width: collapsed ? "0px" : "240px" }}
+        animate={{ width: collapsed ? "70px" : "240px" }}
         className={`fixed inset-y-0 left-0 z-40 flex h-full flex-col border-r bg-white shadow-sm transition-all dark:border-gray-800 dark:bg-gray-900 md:relative md:w-64 ${
           collapsed ? "md:w-20" : "md:w-64"
         }`}
       >
         {/* Sidebar header */}
-        <div className="flex h-16 items-center justify-between px-4">
-          <Link href="/dashboard" className="flex items-center">
-            {!collapsed && <span className="text-xl font-bold text-blue-600 dark:text-blue-400">Sheger Portal</span>}
+        <div className="flex flex-col px-4 pt-1">
+          <div className="flex justify-end mb-1">
+            <Button variant="ghost" size="icon" onClick={() => setCollapsed(!collapsed)} className="hidden md:flex">
+              {collapsed ? <Menu size={20} /> : <X size={20} />}
+            </Button>
+          </div>
+          <Link href="/dashboard" className="flex justify-center">
+            {!collapsed && <span className="text-xl font-bold text-blue-600 dark:text-blue-400">
+              <Image
+                src="/logo.png"
+                alt="Sheger Entrepreneurs Association"
+                width={70}
+                height={70}
+                className="h-14 w-auto"
+              />
+            </span>}
           </Link>
-          <Button variant="ghost" size="icon" onClick={() => setCollapsed(!collapsed)} className="hidden md:flex">
-            {collapsed ? <Menu size={20} /> : <X size={20} />}
-          </Button>
         </div>
 
         {/* User info */}
         <div className="flex flex-col items-center p-4">
           <Avatar className="h-12 w-12">
-            <AvatarImage src="/placeholder.svg" alt={user?.firstName || "User"} />
+            <AvatarImage src="/placeholder.svg" alt={user?.firstname || "User"} />
             <AvatarFallback className="bg-blue-100 text-blue-600 dark:bg-blue-900 dark:text-blue-300">
-              {user?.firstName?.[0]}
-              {user?.lastName?.[0]}
+              {user?.firstname?.[0]}
+              {user?.lastname?.[0]}
             </AvatarFallback>
           </Avatar>
           {!collapsed && (
             <div className="mt-2 text-center">
               <p className="font-medium">
-                {user?.firstName} {user?.lastName}
+                {user?.firstname} {user?.lastname}
               </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
+              {/* <p className="text-xs text-gray-500 dark:text-gray-400">
                 {role.replace("_", " ").replace(/\b\w/g, (l) => l.toUpperCase())}
-              </p>
+              </p> */}
             </div>
           )}
         </div>
@@ -140,7 +152,20 @@ export default function DashboardSidebar() {
                 }`}
               >
                 <item.icon className={`mr-3 h-5 w-5 ${collapsed ? "mr-0" : "mr-3"}`} />
-                {!collapsed && <span>{item.name}</span>}
+                <AnimatePresence mode="wait">
+                  {!collapsed && (
+                    <motion.span
+                      key="text"
+                      initial={{ opacity: 0, width: 0 }}
+                      animate={{ opacity: 1, width: "auto" }}
+                      exit={{ opacity: 0, width: 0 }}
+                      transition={{ duration: 0.2 }}
+                      className="overflow-hidden whitespace-nowrap"
+                    >
+                      {item.name}
+                    </motion.span>
+                  )}
+                </AnimatePresence>
                 {isActive && !collapsed && (
                   <motion.div
                     layoutId="sidebar-indicator"
@@ -163,7 +188,20 @@ export default function DashboardSidebar() {
             onClick={logout}
           >
             <LogOut className={`mr-3 h-5 w-5 ${collapsed ? "mr-0" : "mr-3"}`} />
-            {!collapsed && <span>Logout</span>}
+            <AnimatePresence mode="wait">
+              {!collapsed && (
+                <motion.span
+                  key="logout-text"
+                  initial={{ opacity: 0, width: 0 }}
+                  animate={{ opacity: 1, width: "auto" }}
+                  exit={{ opacity: 0, width: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden whitespace-nowrap"
+                >
+                  Logout
+                </motion.span>
+              )}
+            </AnimatePresence>
           </Button>
         </div>
       </motion.div>

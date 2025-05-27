@@ -9,11 +9,12 @@ import CheckinOfficerDashboard from "@/components/dashboards/checkin-officer-das
 
 export default function DashboardPage() {
   const { user } = useAuth()
+  console.log("user", user	)
 
   // Render the appropriate dashboard based on user role
   const renderDashboard = () => {
-    switch (user?.role) {
-      case "superadmin":
+    switch (user?.role?.id) {
+      case "4a8ca44c-9650-4fb6-b90e-c05fa2a88ad6":
         return <SuperAdminDashboard />
       case "branch_admin":
         return <BranchAdminDashboard />

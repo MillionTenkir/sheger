@@ -3,7 +3,6 @@
 import type React from "react"
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
@@ -12,77 +11,32 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { useToast } from "@/hooks/use-toast"
+import { useAuth } from "@/components/auth-provider"
 
 export default function LoginPage() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [showPassword, setShowPassword] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
-  const router = useRouter()
+  const { login, isLoginLoading, loginError } = useAuth()
   const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
 
     try {
-      // This is a mock API call - replace with your actual API endpoint
-      // const response = await fetch("/api/auth/login", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email, password }),
-      // })
-
-      // Mock successful login for demonstration
-      // In a real app, you would check response.ok and get the token from response.json()
-
-      // Simulate API delay
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-
-      // Mock different user roles for demonstration
-      let userRole
-      if (email.includes("admin")) {
-        userRole = "superadmin"
-      } else if (email.includes("branch")) {
-        userRole = "branch_admin"
-      } else if (email.includes("kid")) {
-        userRole = "kidpreneur"
-      } else if (email.includes("loan")) {
-        userRole = "loan_manager"
-      } else if (email.includes("checkin")) {
-        userRole = "checkin_officer"
-      } else {
-        userRole = "kidpreneur" // Default role
-      }
-
-      // Mock user data that would come from the JWT token
-      const userData = {
-        firstName: "John",
-        lastName: "Doe",
-        email: email,
-        mobile: "+251912345678",
-        role: userRole,
-      }
-
-      // Store user data in localStorage (in a real app, you'd store the JWT token)
-      localStorage.setItem("user", JSON.stringify(userData))
-
+      await login({ identifier:email, password })
+      
       toast({
         title: "Login successful",
-        description: `Welcome back, ${userData.firstName}!`,
+        description: "Welcome back!",
       })
-
-      // Redirect to dashboard
-      router.push("/dashboard")
     } catch (error) {
-      console.error("Login error:", error)
+      // Error handling is done in the auth provider
       toast({
         title: "Login failed",
-        description: "Please check your credentials and try again.",
+        description: loginError || "Please check your credentials and try again.",
         variant: "destructive",
       })
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -181,9 +135,9 @@ export default function LoginPage() {
               <Button
                 type="submit"
                 className="w-full bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-                disabled={isLoading}
+                disabled={isLoginLoading}
               >
-                {isLoading ? "Signing in..." : "Sign in"}
+                {isLoginLoading ? "Signing in..." : "Sign in"}
               </Button>
             </div>
           </form>
